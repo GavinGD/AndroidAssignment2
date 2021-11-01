@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "677292641684",
+    "firebase_url": "https://assignment2covidcases-default-rtdb.firebaseio.com",
+    "project_id": "assignment2covidcases",
+    "storage_bucket": "assignment2covidcases.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677292641684:android:c527cecf255a1d4ff0d381",
+        "android_client_info": {
+          "package_name": "ca.bcit.assignment2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "677292641684-a5d0tnv4hr5ff766odae6npqpf0llm90.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcVRxbiR691mhm8fpPRkrsX0Wb1wrJzOk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "677292641684-a5d0tnv4hr5ff766odae6npqpf0llm90.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
