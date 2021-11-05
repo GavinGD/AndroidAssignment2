@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Assignment2</string>
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTER USER</string>
+    <string name="logout">Logout</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_title">LOGIN</string>
+    <string name="create_new_account">Create new account</string>
+    <string name="johnny">Johnny Hui (A00973103)</string>
+    <string name="gavin">Gavin Knoke (A12345678)</string>
+    <string name="monthYearCases">Cases by Month &amp; Year</string>
+    <string name="healthAuthCases">Cases by Health Authority</string>
+    <string name="genderCases">Cases by Gender</string>
+    <string name="ageGroupCases">Cases by Age Group</string>
+    <string name="logoutBtnTag">Log Out</string>
+    <string name="app_title">COVID APP</string>
+    <string name="fullNameRegister">Full Name</string>
+    <string name="age">Age</string>
 </resources>
