@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class RegisterActivity extends AppCompatActivity {
     EditText editEmail, editPassword, editFullName, editAge;
     Button btnRegister;
-    TextView tvLogin;
+    //TextView tvLogin;
     ProgressBar progressBar;
 
     @Override
@@ -103,12 +103,12 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        tvLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-            }
-        });
+//        tvLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+//            }
+//        });
 
 
     }
