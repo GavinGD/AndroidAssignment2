@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText editEmail, editPassword, editFullName, editAge;
@@ -87,15 +88,35 @@ public class RegisterActivity extends AppCompatActivity {
 
                 progressBar.setVisibility(View.VISIBLE);
 
-                // register user
+                // Registers user and saves information to realtime database + authentication database
                 fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    //1) Task 1 - Above code saves user in Authentication DB.
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        //2) Task 2 - Save User to Realtime DB after user saved to auth DB (On-Complete)
                         if (task.isSuccessful()) {
-                            Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            //a) Instantiate User Object to be saved on Database.
+                            User user = new User(fullName, age, email);
+
+                            //b) Connect User object to User collection:
+                            FirebaseDatabase.getInstance().getReference("Users")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    //c) Give indication to user whether successful or not
+                                    if(task.isSuccessful()) {
+                                        Toast.makeText(RegisterActivity.this, "User has been created successfully!", Toast.LENGTH_LONG).show();
+                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                        progressBar.setVisibility(View.VISIBLE);//Disable progressBar after task successful (Don't want it to keep running 4ever).
+                                    } else {
+                                        Toast.makeText(RegisterActivity.this, "ERROR: Failed to register user. Please try again!" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                        progressBar.setVisibility(View.GONE);
+                                    }
+                                }
+                            });
                         } else {
-                            Toast.makeText(RegisterActivity.this, "ERROR: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, "ERROR: Failed to register user. Please try again!" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
