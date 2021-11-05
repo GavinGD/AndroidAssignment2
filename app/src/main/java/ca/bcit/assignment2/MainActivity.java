@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private TextView emailText;
+    private Button logOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         emailText = findViewById(R.id.emailTv);
+
+        //a) Logout button and its onClick event
+        logOut = findViewById(R.id.btn_logout);
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
+        });
+
         mFirebaseAuth = FirebaseAuth.getInstance();
     }
 
@@ -33,14 +45,11 @@ public class MainActivity extends AppCompatActivity {
         //Checks if user currently logged in on start of mainActivity
         if(mFirebaseUser != null) {
             //Gets user email and displays it to textView
-            emailText.setText(mFirebaseUser.getDisplayName());
+            emailText.setText(mFirebaseUser.getEmail());
         } else {
-            startActivity(new Intent(this, LoginActivity.class));
+            startActivity(new Intent(this, RegisterActivity.class));
             finish();
         }
     }
 
-    public void logout(View view) {
-        mFirebaseAuth.signOut();
-    }
 }
