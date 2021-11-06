@@ -3,6 +3,9 @@ package ca.bcit.assignment2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,7 +51,6 @@ public class AgeGroupCaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_age_group_case);
-        Toast.makeText(AgeGroupCaseActivity.this, "Fetching data, please wait...", Toast.LENGTH_LONG).show();
 
         //a) All textView components
         lessTen = findViewById(R.id.lessThanTen);
@@ -74,56 +76,16 @@ public class AgeGroupCaseActivity extends AppCompatActivity {
         eightyTo89.setVisibility(View.GONE);
         ninetyPlus.setVisibility(View.GONE);
 
-        //c) Creates a reference to COVID collections from database
-        databaseCOVIDCases = FirebaseDatabase.getInstance().getReference();
-
-        //**************************//QUERYING//************************
-        Query lessTenQuery = databaseCOVIDCases.orderByChild("Age_Group")
-                             .equalTo("<10");
-        lessTenQuery.addListenerForSingleValueEvent(eventListenerAgesTenBelow);
-
-        Query tenTo19Query = databaseCOVIDCases.orderByChild("Age_Group")
-                            .equalTo("10-19");
-        tenTo19Query.addListenerForSingleValueEvent(eventListenerAgesTenTo19);
-
-        Query twentyTo29Query = databaseCOVIDCases.orderByChild("Age_Group")
-                                .equalTo("20-29");
-        twentyTo29Query.addListenerForSingleValueEvent(eventListenerAgesTwentyTo29);
-
-        Query thirtyTo39Query = databaseCOVIDCases.orderByChild("Age_Group")
-                                .equalTo("30-39");
-        thirtyTo39Query.addListenerForSingleValueEvent(eventListenerAgesThirtyTo39);
-
-        Query fortyTo49Query = databaseCOVIDCases.orderByChild("Age_Group")
-                               .equalTo("40-49");
-        fortyTo49Query.addListenerForSingleValueEvent(eventListenerAgesFortyTo49);
-
-        Query fiftyTo59Query = databaseCOVIDCases.orderByChild("Age_Group")
-                               .equalTo("50-59");
-        fiftyTo59Query.addListenerForSingleValueEvent(eventListenerAgesFiftyTo59);
-
-        Query sixtyTo69Query = databaseCOVIDCases.orderByChild("Age_Group")
-                               .equalTo("60-69");
-        sixtyTo69Query.addListenerForSingleValueEvent(eventListenerAgesSixtyTo69);
-
-        Query seventyTo79Query = databaseCOVIDCases.orderByChild("Age_Group")
-                                .equalTo("70-79");
-        seventyTo79Query.addListenerForSingleValueEvent(eventListenerAgesSeventyTo79);
-
-        Query eightyTo89Query = databaseCOVIDCases.orderByChild("Age_Group")
-                .equalTo("80-89");
-        eightyTo89Query.addListenerForSingleValueEvent(eventListenerAgesEightyTo89);
-
-        Query ninetyTo90Query = databaseCOVIDCases.orderByChild("Age_Group")
-                .equalTo("90+");
-        ninetyTo90Query.addListenerForSingleValueEvent(eventListenerAgesNinetyPlus);
-
-        //**********************//END OF QUERYING//*********************
+        //c) Calls AsyncTask to handle querying
+        new AsyncCaller().execute();
 
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(AgeGroupCaseActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 finish();
             }
         });
@@ -140,6 +102,7 @@ public class AgeGroupCaseActivity extends AppCompatActivity {
             String counter = getString(R.string.ages10BelowHeader, Long.toString(LESS_THAN_TEN_COUNT));
             lessTen.setText(counter);
             lessTen.setVisibility(View.VISIBLE);
+            databaseCOVIDCases.removeEventListener(this);
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -158,6 +121,7 @@ public class AgeGroupCaseActivity extends AppCompatActivity {
             String counter = getString(R.string.agesTenTo19Header, Long.toString(TEN_TO_19_COUNT));
             tenTo19.setText(counter);
             tenTo19.setVisibility(View.VISIBLE);
+            databaseCOVIDCases.removeEventListener(this);
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -176,6 +140,7 @@ public class AgeGroupCaseActivity extends AppCompatActivity {
             String counter = getString(R.string.agesTwentyTo29Header, Long.toString(TWENTY_TO_29_COUNT));
             twentyTo29.setText(counter);
             twentyTo29.setVisibility(View.VISIBLE);
+            databaseCOVIDCases.removeEventListener(this);
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -194,6 +159,7 @@ public class AgeGroupCaseActivity extends AppCompatActivity {
             String counter = getString(R.string.agesThirtyTo39Header, Long.toString(THIRTY_TO_39_COUNT));
             thirtyTo39.setText(counter);
             thirtyTo39.setVisibility(View.VISIBLE);
+            databaseCOVIDCases.removeEventListener(this);
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -212,6 +178,7 @@ public class AgeGroupCaseActivity extends AppCompatActivity {
             String counter = getString(R.string.agesFortyTo49Header, Long.toString(FORTY_TO_49_COUNT));
             fortyTo49.setText(counter);
             fortyTo49.setVisibility(View.VISIBLE);
+            databaseCOVIDCases.removeEventListener(this);
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -230,6 +197,7 @@ public class AgeGroupCaseActivity extends AppCompatActivity {
             String counter = getString(R.string.agesFiftyTo59Header, Long.toString(FIFTY_TO_59_COUNT));
             fiftyTo59.setText(counter);
             fiftyTo59.setVisibility(View.VISIBLE);
+            databaseCOVIDCases.removeEventListener(this);
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -248,6 +216,7 @@ public class AgeGroupCaseActivity extends AppCompatActivity {
             String counter = getString(R.string.agesSixtyTo69Header, Long.toString(SIXTY_TO_69_COUNT));
             sixtyTo69.setText(counter);
             sixtyTo69.setVisibility(View.VISIBLE);
+            databaseCOVIDCases.removeEventListener(this);
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -266,6 +235,7 @@ public class AgeGroupCaseActivity extends AppCompatActivity {
             String counter = getString(R.string.agesSeventyTo79Header, Long.toString(SEVENTY_TO_79_COUNT));
             seventyTo79.setText(counter);
             seventyTo79.setVisibility(View.VISIBLE);
+            databaseCOVIDCases.removeEventListener(this);
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -284,6 +254,7 @@ public class AgeGroupCaseActivity extends AppCompatActivity {
             String counter = getString(R.string.agesEightyTo89Header, Long.toString(EIGHTY_TO_89_COUNT));
             eightyTo89.setText(counter);
             eightyTo89.setVisibility(View.VISIBLE);
+            databaseCOVIDCases.removeEventListener(this);
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -302,10 +273,87 @@ public class AgeGroupCaseActivity extends AppCompatActivity {
             String counter = getString(R.string.ages90PlusHeader, Long.toString(NINENTY_PLUS_COUNT));
             ninetyPlus.setText(counter);
             ninetyPlus.setVisibility(View.VISIBLE);
+            databaseCOVIDCases.removeEventListener(this);
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
             Toast.makeText(AgeGroupCaseActivity.this, "Data failed to load!", Toast.LENGTH_LONG).show();
         }
     };
+
+    private class AsyncCaller extends AsyncTask<Void, Void, Void>
+    {
+        ProgressDialog pdLoading = new ProgressDialog(AgeGroupCaseActivity.this);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Toast.makeText(AgeGroupCaseActivity.this, "Fetching data, please wait...", Toast.LENGTH_LONG).show();
+
+        }
+        @Override
+        protected Void doInBackground(Void... params) {
+            //c) Creates a reference to COVID collections from database
+            databaseCOVIDCases = FirebaseDatabase.getInstance().getReference();
+
+            //**************************//QUERYING//************************
+            Query lessTenQuery = databaseCOVIDCases.orderByChild("Age_Group")
+                    .equalTo("<10");
+            lessTenQuery.addListenerForSingleValueEvent(eventListenerAgesTenBelow);
+            databaseCOVIDCases.removeEventListener(eventListenerAgesTenBelow);
+
+            Query tenTo19Query = databaseCOVIDCases.orderByChild("Age_Group")
+                    .equalTo("10-19");
+            tenTo19Query.addListenerForSingleValueEvent(eventListenerAgesTenTo19);
+            databaseCOVIDCases.removeEventListener(eventListenerAgesTenTo19);
+
+            Query twentyTo29Query = databaseCOVIDCases.orderByChild("Age_Group")
+                    .equalTo("20-29");
+            twentyTo29Query.addListenerForSingleValueEvent(eventListenerAgesTwentyTo29);
+            databaseCOVIDCases.removeEventListener(eventListenerAgesTwentyTo29);
+
+            Query thirtyTo39Query = databaseCOVIDCases.orderByChild("Age_Group")
+                    .equalTo("30-39");
+            thirtyTo39Query.addListenerForSingleValueEvent(eventListenerAgesThirtyTo39);
+            databaseCOVIDCases.removeEventListener(eventListenerAgesThirtyTo39);
+
+            Query fortyTo49Query = databaseCOVIDCases.orderByChild("Age_Group")
+                    .equalTo("40-49");
+            fortyTo49Query.addListenerForSingleValueEvent(eventListenerAgesFortyTo49);
+            databaseCOVIDCases.removeEventListener(eventListenerAgesFortyTo49);
+
+            Query fiftyTo59Query = databaseCOVIDCases.orderByChild("Age_Group")
+                    .equalTo("50-59");
+            fiftyTo59Query.addListenerForSingleValueEvent(eventListenerAgesFiftyTo59);
+            databaseCOVIDCases.removeEventListener(eventListenerAgesFiftyTo59);
+
+            Query sixtyTo69Query = databaseCOVIDCases.orderByChild("Age_Group")
+                    .equalTo("60-69");
+            sixtyTo69Query.addListenerForSingleValueEvent(eventListenerAgesSixtyTo69);
+            databaseCOVIDCases.removeEventListener(eventListenerAgesSixtyTo69);
+
+            Query seventyTo79Query = databaseCOVIDCases.orderByChild("Age_Group")
+                    .equalTo("70-79");
+            seventyTo79Query.addListenerForSingleValueEvent(eventListenerAgesSeventyTo79);
+            databaseCOVIDCases.removeEventListener(eventListenerAgesSeventyTo79);
+
+            Query eightyTo89Query = databaseCOVIDCases.orderByChild("Age_Group")
+                    .equalTo("80-89");
+            eightyTo89Query.addListenerForSingleValueEvent(eventListenerAgesEightyTo89);
+            databaseCOVIDCases.removeEventListener(eventListenerAgesEightyTo89);
+
+            Query ninetyTo90Query = databaseCOVIDCases.orderByChild("Age_Group")
+                    .equalTo("90+");
+            ninetyTo90Query.addListenerForSingleValueEvent(eventListenerAgesNinetyPlus);
+            databaseCOVIDCases.removeEventListener(eventListenerAgesNinetyPlus);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            Toast.makeText(AgeGroupCaseActivity.this, "Data has been successfully loaded!", Toast.LENGTH_LONG).show();
+        }
+    }
+
 }
