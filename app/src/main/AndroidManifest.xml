@@ -9,12 +9,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:largeHeap="true">
         <activity
-            android:name=".HealthAuthorityCase"
+            android:name=".AgeGroupCaseActivity"
             android:exported="false" />
         <activity
-            android:name=".MonthYearCase"
+            android:name=".HealthAuthorityCaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MonthYearCaseActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"

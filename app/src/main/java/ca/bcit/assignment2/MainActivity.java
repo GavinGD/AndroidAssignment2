@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private Button logOutBtn;
     private Button caseMonthYearBtn;
     private Button caseByHABtn;
+    private Button caseByAgeGrp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         caseMonthYearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, MonthYearCase.class));
+                startActivity(new Intent(MainActivity.this, MonthYearCaseActivity.class));
             }
         });
 
@@ -40,7 +41,15 @@ public class MainActivity extends AppCompatActivity {
         caseByHABtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, HealthAuthorityCase.class));
+                startActivity(new Intent(MainActivity.this, HealthAuthorityCaseActivity.class));
+            }
+        });
+
+        caseByAgeGrp = findViewById(R.id.caseByAgeGroup);
+        caseByAgeGrp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AgeGroupCaseActivity.class));
             }
         });
 

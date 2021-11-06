@@ -34,6 +34,16 @@
     <string name="vanCoastalHeader"><b>Vancouver Coastal: %1$s</b></string>
     <string name="vanIslandHeader"><b>Vancouver Island: %1$s</b></string>
 
+    <string name="ages10BelowHeader">Ages less than 10: %1$s</string>
+    <string name="agesTenTo19Header">Ages 10 to 19: %1$s</string>
+    <string name="agesTwentyTo29Header">Ages 20 to 29: %1$s</string>
+    <string name="agesThirtyTo39Header">Ages 30 to 39: %1$s</string>
+    <string name="agesFortyTo49Header">Ages 40 to 49: %1$s</string>
+    <string name="agesFiftyTo59Header">Ages 50 to 59: %1$s</string>
+    <string name="agesSixtyTo69Header">Ages 60 to 69: %1$s</string>
+    <string name="agesSeventyTo79Header">Ages 70 to 79: %1$s</string>
+    <string name="agesEightyTo89Header">Ages 80 to 89: %1$s</string>
+    <string name="ages90PlusHeader">Ages 90+: %1$s</string>
 
     <string-array name="years">
         <item>2020</item>

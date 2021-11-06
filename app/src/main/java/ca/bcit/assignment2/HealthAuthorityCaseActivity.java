@@ -4,9 +4,7 @@ package ca.bcit.assignment2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HealthAuthorityCase extends AppCompatActivity {
+public class HealthAuthorityCaseActivity extends AppCompatActivity {
     private TextView fraserHA;
     private TextView interiorHA;
     private TextView northernHA;
@@ -47,7 +45,7 @@ public class HealthAuthorityCase extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health_authority_case);
-        Toast.makeText(HealthAuthorityCase.this, "Fetching data, please wait...", Toast.LENGTH_LONG).show();
+        Toast.makeText(HealthAuthorityCaseActivity.this, "Fetching data, please wait...", Toast.LENGTH_LONG).show();
 
         //All of the textViews
         fraserHA = findViewById(R.id.fraserHA);
@@ -57,7 +55,7 @@ public class HealthAuthorityCase extends AppCompatActivity {
         vanCoastalHA = findViewById(R.id.vanCoastalHA);
         vanIslandHA = findViewById(R.id.vanIslandHA);
 
-        //a) Set visibility off (to hide how Query works :D )
+        //a) Set visibility off (to hide how Query works :D and TextView placeholders)
         fraserHA.setVisibility(View.GONE);
         interiorHA.setVisibility(View.GONE);
         northernHA.setVisibility(View.GONE);
@@ -125,7 +123,7 @@ public class HealthAuthorityCase extends AppCompatActivity {
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            Toast.makeText(HealthAuthorityCase.this, "Data failed to load!", Toast.LENGTH_LONG).show();
+            Toast.makeText(HealthAuthorityCaseActivity.this, "Data failed to load!", Toast.LENGTH_LONG).show();
         }
     };
 
@@ -144,7 +142,7 @@ public class HealthAuthorityCase extends AppCompatActivity {
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            Toast.makeText(HealthAuthorityCase.this, "Data failed to load!", Toast.LENGTH_LONG).show();
+            Toast.makeText(HealthAuthorityCaseActivity.this, "Data failed to load!", Toast.LENGTH_LONG).show();
         }
     };
 
@@ -163,7 +161,7 @@ public class HealthAuthorityCase extends AppCompatActivity {
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            Toast.makeText(HealthAuthorityCase.this, "Data failed to load!", Toast.LENGTH_LONG).show();
+            Toast.makeText(HealthAuthorityCaseActivity.this, "Data failed to load!", Toast.LENGTH_LONG).show();
         }
     };
 
@@ -182,7 +180,7 @@ public class HealthAuthorityCase extends AppCompatActivity {
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            Toast.makeText(HealthAuthorityCase.this, "Data failed to load!", Toast.LENGTH_LONG).show();
+            Toast.makeText(HealthAuthorityCaseActivity.this, "Data failed to load!", Toast.LENGTH_LONG).show();
         }
     };
 
@@ -201,7 +199,7 @@ public class HealthAuthorityCase extends AppCompatActivity {
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            Toast.makeText(HealthAuthorityCase.this, "Data failed to load!", Toast.LENGTH_LONG).show();
+            Toast.makeText(HealthAuthorityCaseActivity.this, "Data failed to load!", Toast.LENGTH_LONG).show();
         }
     };
 
@@ -220,8 +218,7 @@ public class HealthAuthorityCase extends AppCompatActivity {
         }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
-            Toast.makeText(HealthAuthorityCase.this, "Data failed to load!", Toast.LENGTH_LONG).show();
+            Toast.makeText(HealthAuthorityCaseActivity.this, "Data failed to load!", Toast.LENGTH_LONG).show();
         }
     };
-
 }

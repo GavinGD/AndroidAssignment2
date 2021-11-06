@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MonthYearCase extends AppCompatActivity {
+public class MonthYearCaseActivity extends AppCompatActivity {
     private static final String JANUARY = "January";
     private static final String FEBRUARY = "February";
     private static final String MARCH = "March";
@@ -95,7 +95,7 @@ public class MonthYearCase extends AppCompatActivity {
      *      The current view.
      */
     public void onClickFindQuery(View v) {
-        Toast.makeText(MonthYearCase.this, "Fetching data, please wait...", Toast.LENGTH_LONG).show();
+        Toast.makeText(MonthYearCaseActivity.this, "Fetching data, please wait...", Toast.LENGTH_LONG).show();
 
         //To prevent over-clicking of the onClick event
         if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
@@ -132,13 +132,13 @@ public class MonthYearCase extends AppCompatActivity {
                 }
 
                 //Populates covidCases information to listView
-                CaseListAdapter adapter = new CaseListAdapter(MonthYearCase.this, caseList);
+                CaseListAdapter adapter = new CaseListAdapter(MonthYearCaseActivity.this, caseList);
                 casesLv.setAdapter(adapter);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(MonthYearCase.this, "Data failed to load!", Toast.LENGTH_LONG).show();
+                Toast.makeText(MonthYearCaseActivity.this, "Data failed to load!", Toast.LENGTH_LONG).show();
             }
         });
     }
