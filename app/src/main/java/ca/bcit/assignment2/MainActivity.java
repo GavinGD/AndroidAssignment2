@@ -15,13 +15,25 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private TextView emailText;
     private Button logOut;
+    private Button caseMonthYear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
+        //a) View components
         emailText = findViewById(R.id.emailTv);
+
+        caseMonthYear = findViewById(R.id.caseMonthYear);
+        caseMonthYear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, MonthYearCase.class));
+            }
+        });
 
         //a) Logout button and its onClick event
         logOut = findViewById(R.id.btn_logout);
@@ -33,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mFirebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override

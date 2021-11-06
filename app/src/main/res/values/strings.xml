@@ -17,4 +17,34 @@
     <string name="app_title">COVID APP</string>
     <string name="fullNameRegister">Full Name</string>
     <string name="age">Age</string>
+    <string name="yearTag">Year</string>
+    <string name="monthTag">Month</string>
+    <string name="findButtonTag">Find</string>
+    <string name="backButtonTag">BACK</string>
+    <string name="underlineTextView"><u>TextView</u></string>
+    <string name="genderHeader">Gender: </string>
+    <string name="classificationHeader">Classification: </string>
+    <string name="HAHeader">Health Authority: </string>
+    <string name="ageHeader">Age: </string>
+
+
+    <string-array name="years">
+        <item>2020</item>
+        <item>2021</item>
+    </string-array>
+
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
 </resources>

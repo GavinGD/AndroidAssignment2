@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterActivity extends AppCompatActivity {
     EditText editEmail, editPassword, editFullName, editAge;
     Button btnRegister;
+    private FirebaseAuth mAuth;
     //TextView tvLogin;
     ProgressBar progressBar;
 
@@ -38,11 +40,10 @@ public class RegisterActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
         //Firebase authenticator
-        FirebaseAuth fAuth;
-        fAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         //Checks if user is still logged in after backing out of app for some time
-        if (fAuth.getCurrentUser() != null) {
+        if (mAuth.getCurrentUser() != null) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
@@ -74,6 +75,13 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
+                //Checks if email address matches correct format (Ex: @mail.com)
+                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    editEmail.setError("Please enter a valid email address");
+                    editEmail.requestFocus();
+                    return;
+                }
+
                 if (TextUtils.isEmpty(password)) {
                     editPassword.setError("Password is required");
                     editPassword.requestFocus();
@@ -88,8 +96,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                 progressBar.setVisibility(View.VISIBLE);
 
-                // Registers user and saves information to realtime database + authentication database
-                fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                // Create "users" collection and saves information to realtime database + authentication database
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     //1) Task 1 - Above code saves user in Authentication DB.
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -108,11 +116,10 @@ public class RegisterActivity extends AppCompatActivity {
                                     if(task.isSuccessful()) {
                                         Toast.makeText(RegisterActivity.this, "User has been created successfully!", Toast.LENGTH_LONG).show();
                                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                        progressBar.setVisibility(View.VISIBLE);//Disable progressBar after task successful (Don't want it to keep running 4ever).
                                     } else {
                                         Toast.makeText(RegisterActivity.this, "ERROR: Failed to register user. Please try again!" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                        progressBar.setVisibility(View.GONE);
                                     }
+                                    progressBar.setVisibility(View.GONE);//Disable progressBar after task successful (Don't want it to keep running 4ever).
                                 }
                             });
                         } else {
