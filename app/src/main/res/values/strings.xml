@@ -22,11 +22,10 @@
     <string name="findButtonTag">Find</string>
     <string name="backButtonTag">BACK</string>
     <string name="underlineTextView"><u>TextView</u></string>
-    <string name="genderHeader">Gender: </string>
-    <string name="classificationHeader">Classification: </string>
-    <string name="HAHeader">Health Authority: </string>
-    <string name="ageHeader">Age: </string>
-
+    <string name="genderHeader"><b>Gender: %1$s</b></string>
+    <string name="classificationHeader"><b>Classification: %1$s</b></string>
+    <string name="HAHeader"><b>Health Authority: %1$s</b></string>
+    <string name="ageHeader"><b>Age: %1$s</b></string>
 
     <string-array name="years">
         <item>2020</item>

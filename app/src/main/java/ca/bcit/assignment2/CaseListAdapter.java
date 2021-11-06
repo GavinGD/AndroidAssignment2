@@ -2,6 +2,7 @@ package ca.bcit.assignment2;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ public class CaseListAdapter extends ArrayAdapter<Case> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         LayoutInflater inflater = context.getLayoutInflater();
 
         View listViewItem = inflater.inflate(R.layout.list_layout, null, true);
@@ -42,12 +44,21 @@ public class CaseListAdapter extends ArrayAdapter<Case> {
         TextView tvAgeGrp = listViewItem.findViewById(R.id.ageGroup);
         TextView tvGender = listViewItem.findViewById(R.id.gender);
 
+        //a) Getting each covidCase from arraylist
         Case covidCase = covidCaseList.get(position);
+
+        //1) Concatenating Headers to each property of covidCase as Strings
+        String HA = context.getString(R.string.HAHeader, covidCase.getHA());
+        String classification = context.getString(R.string.classificationHeader, covidCase.getClassification_Reported());
+        String age = context.getString(R.string.ageHeader, covidCase.getAge_group());
+        String gender = context.getString(R.string.genderHeader, covidCase.getSex());
+
         tvReportDate.setText(covidCase.getReported_Date());
-        tvHealthAuth.setText(covidCase.getHA());
-        tvLabDiagnosis.setText(covidCase.getClassification_Reported());
-        tvAgeGrp.setText(covidCase.getAge_group());
-        tvGender.setText(covidCase.getSex());
+        tvReportDate.setPaintFlags(tvReportDate.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        tvHealthAuth.setText(HA);
+        tvLabDiagnosis.setText(classification);
+        tvAgeGrp.setText(age);
+        tvGender.setText(gender);
 
         return listViewItem;
     }
