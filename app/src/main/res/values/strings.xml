@@ -27,12 +27,16 @@
     <string name="HAHeader"><b>Health Authority: %1$s</b></string>
     <string name="ageHeader"><b>Age: %1$s</b></string>
 
+    <string name="maleCasesHeader">Male Cases: %1$s</string>
+    <string name="femaleCasesHeader">Female Cases: %1$s</string>
+
     <string name="fraserHeader"><b>Fraser: %1$s</b></string>
     <string name="interiorHeader"><b>Interior: %1$s</b></string>
     <string name="northernHeader"><b>Northern: %1$s</b></string>
     <string name="outOfCanadaHeader"><b>Out of Canada: %1$s</b></string>
     <string name="vanCoastalHeader"><b>Vancouver Coastal: %1$s</b></string>
     <string name="vanIslandHeader"><b>Vancouver Island: %1$s</b></string>
+    <string name="back">Back</string>
 
     <string name="ages10BelowHeader">Ages less than 10: %1$s</string>
     <string name="agesTenTo19Header">Ages 10 to 19: %1$s</string>

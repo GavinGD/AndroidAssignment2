@@ -20,6 +20,8 @@
         <activity
             android:name=".MonthYearCaseActivity"
             android:exported="false" />
+        <activity android:name=".CasesByGenderActivity"
+            android:exported="false"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true">

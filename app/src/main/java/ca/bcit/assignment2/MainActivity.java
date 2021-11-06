@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private Button caseMonthYearBtn;
     private Button caseByHABtn;
     private Button caseByAgeGrp;
+    private Button caseByGender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, HealthAuthorityCaseActivity.class));
             }
+        });
+
+        caseByGender = findViewById(R.id.caseByGender);
+        caseByGender.setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this, CasesByGenderActivity.class));
         });
 
         caseByAgeGrp = findViewById(R.id.caseByAgeGroup);
