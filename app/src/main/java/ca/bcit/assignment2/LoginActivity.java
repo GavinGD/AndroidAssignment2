@@ -101,10 +101,12 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //If user has successfully logged in and sends them to MainActivity
                         if(task.isSuccessful()) {
+                            progressBar.setVisibility(View.GONE);
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         } else {
                             Toast.makeText(LoginActivity.this, "Login failed! Please enter credentials again.", Toast.LENGTH_LONG).show();
                         }
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
             }

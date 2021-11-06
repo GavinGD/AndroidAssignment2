@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/drawable/spinner_background.xml" value="0.12314814814814815" />
         <entry key="app/src/main/res/drawable/spinner_design.xml" value="0.12314814814814815" />
         <entry key="app/src/main/res/drawable/textview_border.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_health_authority_case.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_month_year_case.xml" value="0.335" />

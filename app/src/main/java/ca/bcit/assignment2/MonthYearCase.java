@@ -1,6 +1,6 @@
 //SOURCES USED:
 //https://stackoverflow.com/questions/5608720/android-preventing-double-click-on-a-button
-//https://stackoverflow.com/questions/58908242/firebase-get-data-from-startdate-to-enddate
+//https://stackoverflow.com/questions/52565056/firebase-realtime-database-filter-data-by-date-range
 package ca.bcit.assignment2;
 
 import androidx.annotation.NonNull;
@@ -86,30 +86,6 @@ public class MonthYearCase extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//        databaseCOVIDCases.addValueEventListener(new ValueEventListener() {
-//
-//            //onDataChange triggers when any changes occur to the DB (CREATE/DELETE)
-//            //It updates the listView with most recent view of the DB.
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                caseList.clear();
-//
-//                //SQL EQUIVALENT: SELECT* FROM covidCases
-//                for (DataSnapshot caseSnapshot : dataSnapshot.getChildren()) {
-//                    Case covidCase = caseSnapshot.getValue(Case.class);
-//                    caseList.add(covidCase);
-//                }
-//
-//                //Populates covidCases information to listView
-//                CaseListAdapter adapter = new CaseListAdapter(MonthYearCase.this, caseList);
-//                casesLv.setAdapter(adapter);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
     }
 
     /**
@@ -121,14 +97,12 @@ public class MonthYearCase extends AppCompatActivity {
     public void onClickFindQuery(View v) {
         Toast.makeText(MonthYearCase.this, "Fetching data, please wait...", Toast.LENGTH_LONG).show();
 
-        //Mis-clicking prevention, using threshold of 1000 ms
+        //To prevent over-clicking of the onClick event
         if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
             return;
         }
         mLastClickTime = SystemClock.elapsedRealtime();
 
-        //SQL EQUIVALENT: SELECT* FROM covidCases
-        //                WHERE Reported_Date BETWEEN '1996-07-01' AND '1996-07-31'
         String year = String.valueOf(yearSpinner.getSelectedItem());
         String month = convertMonth(String.valueOf(monthSpinner.getSelectedItem()));
 
@@ -137,6 +111,9 @@ public class MonthYearCase extends AppCompatActivity {
 
         System.out.println(formattedEndDate);
 
+        //SQL EQUIVALENT: SELECT* FROM covidCases
+        //                WHERE Reported_Date
+        //                BETWEEN '1996-07-01' AND '1996-07-31'
         Query searchQuery = FirebaseDatabase.getInstance().getReference().orderByChild("Reported_Date")
                             .startAt(formattedStartDate).endAt(formattedEndDate);
 
@@ -157,7 +134,6 @@ public class MonthYearCase extends AppCompatActivity {
                 //Populates covidCases information to listView
                 CaseListAdapter adapter = new CaseListAdapter(MonthYearCase.this, caseList);
                 casesLv.setAdapter(adapter);
-                Toast.makeText(MonthYearCase.this, "Data has been successfully loaded!", Toast.LENGTH_LONG).show();
             }
 
             @Override

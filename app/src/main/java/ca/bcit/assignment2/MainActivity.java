@@ -14,8 +14,9 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private TextView emailText;
-    private Button logOut;
-    private Button caseMonthYear;
+    private Button logOutBtn;
+    private Button caseMonthYearBtn;
+    private Button caseByHABtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,17 +28,25 @@ public class MainActivity extends AppCompatActivity {
         //a) View components
         emailText = findViewById(R.id.emailTv);
 
-        caseMonthYear = findViewById(R.id.caseMonthYear);
-        caseMonthYear.setOnClickListener(new View.OnClickListener() {
+        caseMonthYearBtn = findViewById(R.id.caseMonthYear);
+        caseMonthYearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, MonthYearCase.class));
             }
         });
 
+        caseByHABtn = findViewById(R.id.caseByAuthority);
+        caseByHABtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, HealthAuthorityCase.class));
+            }
+        });
+
         //a) Logout button and its onClick event
-        logOut = findViewById(R.id.btn_logout);
-        logOut.setOnClickListener(new View.OnClickListener() {
+        logOutBtn = findViewById(R.id.btn_logout);
+        logOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
