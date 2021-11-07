@@ -13,17 +13,22 @@
         android:largeHeap="true">
         <activity
             android:name=".AgeGroupCaseActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HealthAuthorityCaseActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MonthYearCaseActivity"
-            android:exported="false" />
-        <activity android:name=".CasesByGenderActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false"/>
         <activity
+            android:name=".HealthAuthorityCaseActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"/>
+        <activity
+            android:name=".MonthYearCaseActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity android:name=".CasesByGenderActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,10 +38,12 @@
         </activity>
         <activity
             android:name=".RegisterActivity"
-            android:exported="true" />
+            android:configChanges="orientation|screenSize"
+            android:exported="true"/>
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:configChanges="orientation|screenSize"
+            android:exported="true"/>
     </application>
 
 </manifest>

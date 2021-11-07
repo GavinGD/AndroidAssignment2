@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MonthYearCaseActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/caseByMonthYearTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/textview_border"
+            android:fontFamily="sans-serif-black"
+            android:padding="20dp"
+            android:text="@string/monthYearCases"
+            android:textAlignment="center"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:text="@string/yearTag"
+            android:textAlignment="center"
+            android:textColor="@color/black">
+        </TextView>
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:text="@string/monthTag"
+            android:textAlignment="center"
+            android:textColor="@color/black">
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/queryBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/yearSpinner"
+            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:entries="@array/years"
+            android:background="@drawable/spinner_design"
+            android:spinnerMode="dialog">
+        </Spinner>
+
+        <Spinner
+            android:id="@+id/monthSpinner"
+            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:entries="@array/months"
+            android:background="@drawable/spinner_design"
+            android:spinnerMode="dialog">
+        </Spinner>
+
+        <Button
+            android:id="@+id/queryFindButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-black"
+            android:onClick="onClickFindQuery"
+            android:text="@string/findButtonTag">
+        </Button>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/casesListView"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/backButtonTag"/>
+
+</LinearLayout>

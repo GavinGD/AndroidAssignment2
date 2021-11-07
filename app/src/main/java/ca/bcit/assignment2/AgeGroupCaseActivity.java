@@ -52,6 +52,9 @@ public class AgeGroupCaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_age_group_case);
 
+        //c) Creates a reference to COVID collections from database
+        databaseCOVIDCases = FirebaseDatabase.getInstance().getReference();
+
         //a) All textView components
         lessTen = findViewById(R.id.lessThanTen);
         tenTo19 = findViewById(R.id.tenTo19);
@@ -281,8 +284,7 @@ public class AgeGroupCaseActivity extends AppCompatActivity {
         }
     };
 
-    private class AsyncCaller extends AsyncTask<Void, Void, Void>
-    {
+    private class AsyncCaller extends AsyncTask<Void, Void, Void> {
         ProgressDialog pdLoading = new ProgressDialog(AgeGroupCaseActivity.this);
 
         @Override
@@ -293,59 +295,46 @@ public class AgeGroupCaseActivity extends AppCompatActivity {
         }
         @Override
         protected Void doInBackground(Void... params) {
-            //c) Creates a reference to COVID collections from database
-            databaseCOVIDCases = FirebaseDatabase.getInstance().getReference();
-
             //**************************//QUERYING//************************
             Query lessTenQuery = databaseCOVIDCases.orderByChild("Age_Group")
                     .equalTo("<10");
             lessTenQuery.addListenerForSingleValueEvent(eventListenerAgesTenBelow);
-            databaseCOVIDCases.removeEventListener(eventListenerAgesTenBelow);
 
             Query tenTo19Query = databaseCOVIDCases.orderByChild("Age_Group")
                     .equalTo("10-19");
             tenTo19Query.addListenerForSingleValueEvent(eventListenerAgesTenTo19);
-            databaseCOVIDCases.removeEventListener(eventListenerAgesTenTo19);
 
             Query twentyTo29Query = databaseCOVIDCases.orderByChild("Age_Group")
                     .equalTo("20-29");
             twentyTo29Query.addListenerForSingleValueEvent(eventListenerAgesTwentyTo29);
-            databaseCOVIDCases.removeEventListener(eventListenerAgesTwentyTo29);
 
             Query thirtyTo39Query = databaseCOVIDCases.orderByChild("Age_Group")
                     .equalTo("30-39");
             thirtyTo39Query.addListenerForSingleValueEvent(eventListenerAgesThirtyTo39);
-            databaseCOVIDCases.removeEventListener(eventListenerAgesThirtyTo39);
 
             Query fortyTo49Query = databaseCOVIDCases.orderByChild("Age_Group")
                     .equalTo("40-49");
             fortyTo49Query.addListenerForSingleValueEvent(eventListenerAgesFortyTo49);
-            databaseCOVIDCases.removeEventListener(eventListenerAgesFortyTo49);
 
             Query fiftyTo59Query = databaseCOVIDCases.orderByChild("Age_Group")
                     .equalTo("50-59");
             fiftyTo59Query.addListenerForSingleValueEvent(eventListenerAgesFiftyTo59);
-            databaseCOVIDCases.removeEventListener(eventListenerAgesFiftyTo59);
 
             Query sixtyTo69Query = databaseCOVIDCases.orderByChild("Age_Group")
                     .equalTo("60-69");
             sixtyTo69Query.addListenerForSingleValueEvent(eventListenerAgesSixtyTo69);
-            databaseCOVIDCases.removeEventListener(eventListenerAgesSixtyTo69);
 
             Query seventyTo79Query = databaseCOVIDCases.orderByChild("Age_Group")
                     .equalTo("70-79");
             seventyTo79Query.addListenerForSingleValueEvent(eventListenerAgesSeventyTo79);
-            databaseCOVIDCases.removeEventListener(eventListenerAgesSeventyTo79);
 
             Query eightyTo89Query = databaseCOVIDCases.orderByChild("Age_Group")
                     .equalTo("80-89");
             eightyTo89Query.addListenerForSingleValueEvent(eventListenerAgesEightyTo89);
-            databaseCOVIDCases.removeEventListener(eventListenerAgesEightyTo89);
 
             Query ninetyTo90Query = databaseCOVIDCases.orderByChild("Age_Group")
                     .equalTo("90+");
             ninetyTo90Query.addListenerForSingleValueEvent(eventListenerAgesNinetyPlus);
-            databaseCOVIDCases.removeEventListener(eventListenerAgesNinetyPlus);
             return null;
         }
 
@@ -356,4 +345,8 @@ public class AgeGroupCaseActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
