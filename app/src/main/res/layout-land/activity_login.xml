@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/tvApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:fontFamily="sans-serif-black"
+        android:layout_gravity="center"
+        android:textColor="@android:color/holo_purple"
+        android:text="@string/app_title"/>
+
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:hint="@string/email"
+        android:inputType="textPersonName"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:textColorHint="#546E7A"
+        android:inputType="textPassword"
+        android:minHeight="48dp" />
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/login" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvCreateNewAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/teal_200"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:fontFamily="sans-serif-black"
+        android:layout_gravity="center"
+        android:text="@string/create_new_account" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="100dp"
+        android:minWidth="250dp"
+        android:layout_marginTop="60dp"
+        android:max="100"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        android:layout_gravity="center"
+        android:progress="1" />
+
+</LinearLayout>
